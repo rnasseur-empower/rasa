@@ -131,7 +131,7 @@ jobs:
 
       - name: Load Poetry Cached Libraries ⬇
         id: cache-poetry
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # 4.2.0
         with:
           path: .venv
           key: ${{ runner.os }}-poetry-${{ env.POETRY_VERSION }}-3.9-non-full-${{ hashFiles('**/poetry.lock') }}-${{ secrets.POETRY_CACHE_VERSION }}
@@ -143,13 +143,13 @@ jobs:
 
       - name: Create virtual environment
         if: steps.cache-poetry.outputs.cache-hit != 'true'
-        run: python -m venv create .venv
+        run: python -m venv .venv
 
       - name: Set up virtual environment
         run: poetry config virtualenvs.in-project true
 
       - name: Load Yarn Cached Packages ⬇
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # 4.2.0
         with:
           path: docs/node_modules
           key: ${{ runner.os }}-yarn-12.x-${{ hashFiles('docs/yarn.lock') }}
@@ -226,7 +226,7 @@ jobs:
       - name: Load Poetry Cached Libraries ⬇
         id: cache-poetry
         if: needs.changes.outputs.docs == 'true'
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # 4.2.0
         with:
           path: .venv
           key: ${{ runner.os }}-poetry-${{ env.POETRY_VERSION }}-3.9-non-full-${{ hashFiles('**/poetry.lock') }}-${{ secrets.POETRY_CACHE_VERSION }}
@@ -238,7 +238,7 @@ jobs:
 
       - name: Create virtual environment
         if: (steps.cache-poetry.outputs.cache-hit != 'true' || contains(github.event.pull_request.labels.*.name, 'tools:clear-poetry-cache-preview-docs')) && needs.changes.outputs.docs == 'true'
-        run: python -m venv create .venv
+        run: python -m venv .venv
 
       - name: Set up virtual environment
         if: needs.changes.outputs.docs == 'true'
@@ -246,7 +246,7 @@ jobs:
 
       - name: Load Yarn Cached Packages ⬇
         if: needs.changes.outputs.docs == 'true'
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # 4.2.0
         with:
           path: docs/node_modules
           key: ${{ runner.os }}-yarn-12.x-${{ hashFiles('docs/yarn.lock') }}
@@ -299,7 +299,7 @@ jobs:
           node-version: "12.x"
 
       - name: Load Yarn Cached Packages ⬇
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # 4.2.0
         with:
           path: docs/node_modules
           key: ${{ runner.os }}-yarn-12.x-${{ hashFiles('docs/yarn.lock') }}
